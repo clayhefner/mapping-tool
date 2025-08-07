@@ -1,0 +1,28 @@
+/* Page Header */
+.page-header {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 24px 32px;
+  margin-bottom: 24px;
+  border: 2px solid #e5e7eb;
+}
+
+.header-content {
+  max-width: 100%;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.page-description {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+}

@@ -1,0 +1,141 @@
+<div class="mapping-container">
+  <!-- Data Preview Panel -->
+  <div class="data-preview-panel">
+    <div class="panel-header">
+      <h3 class="panel-title">Source Data Preview</h3>
+      <div class="panel-info">
+        <span class="node-count">{{ getLeafNodeCount() }} data fields</span>
+      </div>
+    </div>
+    <div class="panel-content">
+      <div class="data-json">
+        <pre class="json-content">{{ getFormattedRawData() }}</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Schema Mapping Panel -->
+  <div class="data-panel">
+    <div class="panel-header">
+      <h3 class="panel-title">Preczn Token Schema Mapping</h3>
+      <div class="panel-info">
+        <span class="node-count">{{ schemaOptions.length }} schema fields</span>
+      </div>
+    </div>
+
+    <div class="panel-content">
+      <div *ngIf="schemaGroups.length === 0" class="empty-state">
+        <div class="empty-icon">🔍</div>
+        <p class="empty-message">No schema fields available</p>
+        <p class="empty-description">
+          Configure your schema fields in the schema service.
+        </p>
+      </div>
+
+      <div *ngIf="schemaGroups.length > 0" class="schema-list-container">
+        <div *ngFor="let group of schemaGroups" class="schema-group">
+          <h4 class="group-header">{{ group.name }}</h4>
+          <div class="group-fields">
+            <div *ngFor="let schemaField of group.options" class="schema-field">
+              <div class="field-content">
+                <span class="field-label">{{ schemaField.value }}</span>
+              </div>
+
+              <div class="field-mapping">
+                <nz-select
+                  [(ngModel)]="mappings[schemaField.value]"
+                  nzAllowClear
+                  [nzMode]="
+                    schemaField.value === 'expiration' ? 'multiple' : 'default'
+                  "
+                  [nzPlaceHolder]="
+                    schemaField.value === 'expiration'
+                      ? 'Select source field(s)'
+                      : 'Select source field'
+                  "
+                  class="mapping-select"
+                >
+                  <nz-option
+                    *ngFor="let sourcePath of sourcePathsWithSamples"
+                    [nzValue]="sourcePath.path"
+                    [nzLabel]="sourcePath.displayName"
+                  >
+                  </nz-option>
+                </nz-select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Template Name and Source Selection -->
+  <div class="template-meta-panel">
+    <div class="template-meta-fields">
+      <div class="template-inputs">
+        <label for="templateName">Template Name:</label>
+        <input
+          id="templateName"
+          type="text"
+          [(ngModel)]="templateName"
+          placeholder="Enter template name"
+          class="template-name-input"
+        />
+        <label for="sourceSelect" style="margin-left: 1.5em">Source:</label>
+        <select
+          id="sourceSelect"
+          [(ngModel)]="selectedSource"
+          class="source-select"
+        >
+          <option value="" disabled selected>Select source</option>
+          <option *ngFor="let src of sourceOptions" [value]="src">
+            {{ src }}
+          </option>
+        </select>
+      </div>
+      <div class="template-actions">
+        <button
+          class="btn btn-primary export-btn"
+          [disabled]="
+            getMappedCount() === 0 || !templateName || !selectedSource
+          "
+          (click)="exportMapping()"
+        >
+          Save Token Import Format
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JSON Preview Panel -->
+  <div class="summary-panel">
+    <div class="panel-header">
+      <h3 class="panel-title">JSON Preview</h3>
+    </div>
+
+    <div class="panel-content">
+      <div
+        *ngIf="getMappedCount() === 0 && !templateName && !selectedSource"
+        class="empty-preview"
+      >
+        <div class="empty-icon">📄</div>
+        <p class="empty-message">No mappings configured</p>
+        <p class="empty-description">
+          Select source fields for your schema properties to see the JSON
+          preview.<br />
+          <span style="color: #b00; font-size: 0.95em">
+            Please enter a template name and select a source to enable export.
+          </span>
+        </p>
+      </div>
+
+      <div
+        *ngIf="getMappedCount() > 0 || templateName || selectedSource"
+        class="json-preview"
+      >
+        <pre class="json-preview-content">{{ getExportPreview() }}</pre>
+      </div>
+    </div>
+  </div>
+</div>

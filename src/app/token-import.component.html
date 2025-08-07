@@ -1,0 +1,83 @@
+<div class="token-import-container" (click)="closeDropdown()">
+  <div class="header">
+    <h1>Token Import Management</h1>
+  </div>
+
+  <div class="table-container">
+    <table class="token-import-table">
+      <thead>
+        <tr>
+          <th>Token Import ID</th>
+          <th>Created Time</th>
+          <th>Scope</th>
+          <th>Merchant</th>
+          <th>Bulk Import</th>
+          <th>Status</th>
+          <th>Failed Imports</th>
+          <th>Response File</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tokenImport of tokenImports" class="table-row">
+          <td class="token-id">{{ tokenImport.id }}</td>
+          <td>{{ tokenImport.createdTime }}</td>
+          <td>{{ tokenImport.scope }}</td>
+          <td>{{ tokenImport.merchant }}</td>
+          <td>
+            <span
+              class="bulk-import-badge"
+              [class.bulk-yes]="tokenImport.bulkImport"
+            >
+              {{ tokenImport.bulkImport ? "Yes" : "No" }}
+            </span>
+          </td>
+          <td>
+            <span
+              class="status-badge"
+              [ngClass]="getStatusClass(tokenImport.status)"
+            >
+              {{ tokenImport.status }}
+            </span>
+          </td>
+          <td>{{ tokenImport.failedImports }}</td>
+          <td>
+            <button
+              *ngIf="tokenImport.responseFile"
+              class="download-btn"
+              (click)="downloadResponseFile(tokenImport.responseFile)"
+            >
+              Download
+            </button>
+            <span *ngIf="!tokenImport.responseFile" class="no-file">-</span>
+          </td>
+          <td>
+            <div class="options-dropdown">
+              <button
+                class="options-btn"
+                (click)="showOptions($event, tokenImport)"
+              >
+                ⋮
+              </button>
+              <div
+                class="dropdown-content"
+                *ngIf="
+                  isDropdownOpen(tokenImport.id) &&
+                  tokenImport.status === 'needsReview'
+                "
+                (click)="closeDropdown()"
+              >
+                <button
+                  class="dropdown-item"
+                  (click)="mapTokenFile(tokenImport)"
+                >
+                  Map Token File
+                </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

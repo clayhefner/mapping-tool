@@ -1,0 +1,97 @@
+<div class="data-source-manager">
+  <div class="page-header">
+    <div class="header-content">
+      <h2 class="page-title">Data Source Manager</h2>
+      <p class="page-description">
+        Select and configure your data sources for mapping
+      </p>
+    </div>
+  </div>
+
+  <div class="manager-content">
+    <!-- Sample Data Sets Section -->
+    <div class="data-section">
+      <div class="section-header">
+        <h3 class="section-title">
+          <span class="section-icon">📊</span>
+          Sample Data Sets
+        </h3>
+        <p class="section-description">
+          Pre-configured sample data for testing and development
+        </p>
+        <div class="section-actions">
+          <button class="btn btn-outline" (click)="resetToDefault()">
+            🔄 Reset to Default
+          </button>
+        </div>
+      </div>
+
+      <div class="data-grid">
+        <div
+          *ngFor="let dataSet of sampleDataSets; let i = index"
+          class="data-card"
+          [class.active]="selectedDataSet === i"
+          (click)="selectDataSet(i)"
+        >
+          <div class="card-header">
+            <h4 class="card-title">{{ dataSet.name }}</h4>
+            <div class="card-badge">Sample</div>
+          </div>
+
+          <div class="card-content">
+            <p class="card-description">{{ dataSet.description }}</p>
+
+            <div class="card-stats">
+              <div class="stat-item">
+                <span class="stat-label">Fields:</span>
+                <span class="stat-value">{{ dataSet.fieldCount }}</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Modified:</span>
+                <span class="stat-value">{{
+                  formatDate(dataSet.lastModified)
+                }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button
+              class="btn btn-primary"
+              (click)="selectDataSet(i); applyDataSet()"
+              [disabled]="selectedDataSet === i"
+            >
+              {{ selectedDataSet === i ? "Current" : "Select" }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preview Section -->
+    <div class="data-section" *ngIf="selectedDataSet !== null">
+      <div class="section-header">
+        <h3 class="section-title">
+          <span class="section-icon">👁️</span>
+          Data Preview
+        </h3>
+        <p class="section-description">
+          Preview of the currently selected data set
+        </p>
+      </div>
+
+      <div class="preview-container">
+        <div class="preview-header">
+          <h4 class="preview-title">
+            {{ sampleDataSets[selectedDataSet].name }}
+          </h4>
+        </div>
+        <div class="preview-content">
+          <pre class="json-preview">{{
+            getFormattedData(sampleDataSets[selectedDataSet].data)
+          }}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

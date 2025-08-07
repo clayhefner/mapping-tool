@@ -1,0 +1,199 @@
+.token-import-container {
+  padding: 20px;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.header {
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  color: #333;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.table-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.token-import-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.token-import-table th {
+  background-color: #f8f9fa;
+  color: #495057;
+  font-weight: 600;
+  padding: 16px 12px;
+  text-align: left;
+  border-bottom: 2px solid #dee2e6;
+  white-space: nowrap;
+}
+
+.token-import-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e9ecef;
+  vertical-align: middle;
+}
+
+.table-row:hover {
+  background-color: #f8f9fa;
+}
+
+.token-id {
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  color: #6c757d;
+  max-width: 250px;
+  word-break: break-all;
+}
+
+.bulk-import-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  background-color: #dc3545;
+  color: white;
+}
+
+.bulk-import-badge.bulk-yes {
+  background-color: #28a745;
+}
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-needs-review {
+  background-color: #dc3545;
+  color: white;
+}
+
+.status-pending {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.status-complete {
+  background-color: #28a745;
+  color: white;
+}
+
+.download-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.download-btn:hover {
+  background-color: #0056b3;
+}
+
+.no-file {
+  color: #6c757d;
+  font-style: italic;
+}
+
+.options-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.options-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: #6c757d;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.options-btn:hover {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.dropdown-content {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: white;
+  min-width: 150px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  z-index: 1000;
+  border: 1px solid #e9ecef;
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: #495057;
+  transition: background-color 0.2s;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+.dropdown-item:first-child {
+  border-radius: 4px 4px 0 0;
+}
+
+.dropdown-item:last-child {
+  border-radius: 0 0 4px 4px;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  .token-id {
+    max-width: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .token-import-table {
+    font-size: 12px;
+  }
+
+  .token-import-table th,
+  .token-import-table td {
+    padding: 8px 6px;
+  }
+
+  .token-id {
+    max-width: 120px;
+    font-size: 10px;
+  }
+
+  .header h1 {
+    font-size: 24px;
+  }
+}
